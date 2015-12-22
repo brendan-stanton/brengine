@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.js">
+
+    </script>
+    <style type='text/css'>
+      *
+      {
+      	margin: 0;
+      	padding: 0;
+      }
+      #this_world{
+        background-color: black;
+      }
+      .0{
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+
+    <svg id='this_world' height='500' width='800'>
+    </svg>
+
+  </body>
+  <script type="text/javascript">
+
+  var y = 'less_hidden';
+
+  (function(){
+
+    var x = 'hidden';
+
+    //====== ENTITY METHODS =======//
+    var Entity = function EntityConstructor(name, x, y, height, width){
+      this.info = {
+        name: name,
+        x: x,
+        y: y,
+        height: height,
+        width: width,
+        velocity: {
+          x: 0,
+          y: 0
+        }
+      }
+    }
+
+    Entity.prototype.draw = function(){
+
+    }
+    //=== END OF ENTITY METHODS ====//
+
+
+
+
+    //====== WORLD METHODS ========//
+    var World = function WorldConstructor(name, height, width){
+      this.info = {
+        target: '#this_world',
+        name: name,
+        height: height,
+        width: width,
+        dimension: 20,
+        map: [1,1,1,1,1,
+              1,0,0,0,1,
+              1,0,0,0,1,
+              1,0,0,0,1,
+              1,1,1,1,1],
+        ray_map: [],
+        entities: [],
+        tiles: []
+      }
+    }
+
+      // World.prototype.drawWorld = function(){
+      //   $('#this_world').html();
+      //   var svg = "<svg id='" + this.info.name + "' height='" + this.info.height + "' width='" + this.info.width + "'></svg>";
+      //   $(this.info.target).append(svg);
+      // }
+
+      function makeSVG(tag, attrs) {
+           var el= document.createElementNS('http://www.w3.org/2000/svg', tag);
+           for (var k in attrs)
+               el.setAttribute(k, attrs[k]);
+           return el;
+       }
+
+        var circle= makeSVG('circle', {cx: 100, cy: 50, r:40, stroke: 'black', 'stroke-width': 2, fill: 'red'});
+      document.getElementById('s').appendChild(circle);
+
+      World.prototype.drawTiles = function(){
+        for (var i in this.info.map) {
+
+          var current = this.info.map[i];
+
+          console.log(current);
+
+          if(current === 0){
+            var length = this.info.tiles.length;
+            var name = "tile" + length;
+
+            // var temp = new Tile(name, current, this.info.dimension, this.info.dimension);
+            // this.info.tiles.push(temp);
+            // var html = "<rect class='" + temp.info.type + "' name='" + temp.info.name + "' x='" + Math.floor(i/5) * this.info.dimension + "' y='" + (i%5) * this.info.dimension + "' height='20' width='20' style='fill:rgb(250,70,70);stroke-width:0;stroke:rgb(0,0,0)' />";
+            // console.log(html);
+            // $('#this_world').append(html);
+            // var circle= makeSVG('circle', {cx: 100, cy: 50, r:40, stroke: 'black', 'stroke-width': 2, fill: 'red'});
+            // document.getElementById('s').appendChild(circle);
+            // var elem = document.getElementById('this_world');
+            // console.log(elem);
+            // elem.appendChild(html);
+          }else if(current === 1){
+
+          }
+          // extra tile types will need to be defined here
+        }
+      }
+
+      World.prototype.drawEntities = function(){
+
+      }
+      //=== END OF WORLD METHODS ====//
+
+
+
+
+
+
+      //====== TILE METHODS ========//
+      var Tile = function TileConstructor(name, type, x, y){
+        this.info = {
+          name: name,
+          type: type,
+          x: x,
+          y: y
+        }
+      }
+      //=== END OF TILE METHODS ====//
+
+
+      //==== SANDBOX ============//
+
+      var world1 = new World('mushroom_land', 500, 800);
+      //world1.drawWorld();
+      // $(document).ready(function(){
+        //$('#this_world').append("<rect id='rec1' name='rec1' x='440' y='0' width='20' height='180' style='fill:rgb(70,200,70);stroke-width:0;stroke:rgb(0,0,0)' />");
+      // })
+      world1.drawTiles();
+      //===== END OF SANDBOX ====//
+
+
+    })();
+
+  </script>
+</html>
